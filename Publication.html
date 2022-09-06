@@ -58,40 +58,22 @@ MathJax.Hub.Config({
 	<a href="https://arxiv.org/abs/2207.00194">PDF</a></p>
 	<p>  <body>
 We study eigenvalues of the Dirac operator with canonical form
-<table border="1">
-  <thead>
-    <tr>
-      <th>Col 1</th>
-      <th>Col 2</th>
-      <th>Col 3</th>
-      <th colspan="3">Col 4</th>
-    </tr>
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th>Col 4.1</th>
-      <th>Col 4.2</th>
-      <th>Col 4.3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        Val 1
-      </td>
-      <td>
-        Val 2
-      </td>
-      <td>
-        Val 3
-      </td>
-      <td>This is Val 4.1</td>
-      <td>This is Val 4.2</td>
-      <td>This is Val 4.3</td>
-    </tr>
-  </tbody>
-</table>
+ <table>
+  <tr>
+      <th>R/A</th>
+      <% foreach (var a in Model.Select(x => x.objA.NameA).OrderBy(x => x).Distinct()) { %>
+           <th><%= a %></th>
+      <% } %>
+  </tr>
+  <% foreach (var data in Model.GroupBy(x => x.objR.NameR)) { %>
+      <tr> 
+         <td><%= data.Key %></td>
+         <% foreach (var aas in data.OrderBy(x => x.objA.NameA)) { %>
+            <td><%= aas.result ? "1" : "0" %></td>
+         <% } %>
+      </tr>
+  <% } %>
+ </table>
 
 where p and q are real functions. Under the assumption that limsup <sub>x&#8594; &#8734; </sub>x&radic;<span style="text-decoration: overline">p&#178;(x)+q&#178;(x)</span><&#8734;, the essential spectrum of L<sub>p,q</sub> is (-&#8734;, &#8734;). 
 We prove that L<sub>p,q</sub> has no eigenvalues if limsup <sub>x&#8594; &#8734; </sub>x&radic;<span style="text-decoration: overline">p&#178;(x)+q&#178;(x)</span><1/2. 
